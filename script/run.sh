@@ -26,10 +26,10 @@ FILE="../test_files/Ntr7x12i"   # should be absolute path
 OUTPUT=$(curl -K ./curl.conf http://$IP/virusscan -F up_file=@$FILE 2> $LOG_PATH/ikarus-server_pmg.temp.log)
 ERROR=$(cat $LOG_PATH/ikarus-server_pmg.temp.log)
 rm $LOG_PATH/ikarus-server_pmg.temp.log
-[ -n "$ERROR" ] && >&2 echo $ERROR
+[ -n "$ERROR" ] && >&2 echo "$ERROR"
 
-STATUS=$(echo $OUTPUT | grep -o -P '(?<=<status>).*(?=</status>)')
-NAME=$(echo $OUTPUT | grep -o -P '(?<=<name>).*(?=</name>)')
+STATUS=$(echo "$OUTPUT" | grep -o -P '(?<=<status>).*(?=</status>)')
+NAME=$(echo "$OUTPUT" | grep -o -P '(?<=<name>).*(?=</name>)')
 
 # --- PRINT ---
 # print output to STDOUT
@@ -49,7 +49,7 @@ NAME=$(echo $OUTPUT | grep -o -P '(?<=<name>).*(?=</name>)')
 # date; filename; status >> LOG_PATH/ikarus-server_pmg.log
 if [ "$LOG" = "true" ]
     then
-    echo `date` >> $LOG_PATH/ikarus-server_pmg.log
+    date >> $LOG_PATH/ikarus-server_pmg.log
     # check if OUTPUT null >> info or network error
     if [ -n "$OUTPUT" ]
         then
