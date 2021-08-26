@@ -10,19 +10,23 @@ IP="192.168.56.101:80"          # ip + port
 
 FILE="../test_files/Ntr7x12i"   # should be absolute path
 
-OUTPUT=$(curl -K ./curl.conf http://$IP/virusscan -F up_file=@$FILE)
-
 # --- TEST START ---
 # arguments for testing
-[ "$1" = "-v" ] && OUTPUT=$(curl -K ./curl.conf 'http://'$IP'/virusscan' -F up_file=@../test_files/eF9f8G3f)
+[ "$1" = "-n" ] && IP="192.168.56.101:3182"
 
-[ "$1" = "-n" ] && OUTPUT=$(curl -K ./curl.conf 'http://'10.0.0.0'/virusscan' -F up_file=@../test_files/Ntr7x12i)
+[ "$1" = "-v" ] && FILE="../test_files/eF9f8G3f"
 
 if [ "$1" = "-h" ]
     then
     echo "-v virustest"
     echo "-n nettest"
 fi
+
+# --- RUN CURL ---
+OUTPUT=$(curl -K ./curl.conf http://$IP/virusscan -F up_file=@$FILE 2> $LOG_PATH/ikarus-server_pmg.temp.log)
+ERROR=$(cat $LOG_PATH/ikarus-server_pmg.temp.log)
+rm $LOG_PATH/ikarus-server_pmg.temp.log
+[ -n "$ERROR" ] && >&2 echo $ERROR
 
 STATUS=$(echo $OUTPUT | grep -o -P '(?<=<status>).*(?=</status>)')
 NAME=$(echo $OUTPUT | grep -o -P '(?<=<name>).*(?=</name>)')
@@ -57,7 +61,7 @@ if [ "$LOG" = "true" ]
         [ -n "$NAME" ] && echo "name: $NAME" >> $LOG_PATH/ikarus-server_pmg.log
         else
         echo "FILE NAME" >> $LOG_PATH/ikarus-server_pmg.log
-        echo "connection error to $IP" >> $LOG_PATH/ikarus-server_pmg.log
+        echo "$ERROR" >> $LOG_PATH/ikarus-server_pmg.log
     fi
     # seperator for different entrys
     echo "---" >> $LOG_PATH/ikarus-server_pmg.log
