@@ -2,18 +2,19 @@
 
 > Proxmox Mail Gateway Custom Check Interface for the Ikarus Server.
 
+> (license is required)
+
 ## Info
 
 For use cases which are not handled by the Proxmox Mail Gateway Virus Detector andSpamAssassin™configuration, advanced users can create a custom check executable which, if enabled will be called beforethe Virus Detector and before passing an e-mail through the Rule System. The custom check API is keptas simple as possible, while still providing a great deal of control over the treatment of an e-mail.
 
-## Links
+[↳ admin guid](https://pmg.proxmox.com/pmg-docs/pmg-admin-guide.html#pmgconfig_custom_check)
 
-[PMG admin guid](https://pmg.proxmox.com/pmg-docs/pmg-admin-guide.html#pmgconfig_custom_check)
+[Packages / Scripts + Quick Start Guide](https://fx.ikarus.at/scan.server/)
 
 ## server
 
-> ikarus-scanserver-1.7.2_amd64.deb [(download)](https://fx.ikarus.at/scan.server/)
-> (license required)
+> ikarus-scanserver-1.7.2_amd64.deb [download](https://fx.ikarus.at/scan.server/)
 
 ### working
 
