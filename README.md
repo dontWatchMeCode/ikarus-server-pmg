@@ -1,8 +1,6 @@
 # Proxmox Mail Gateway + Ikarus
 
-> Proxmox Mail Gateway Custom Check Interface for the Ikarus Server.
-
-> (license is required)
+> Proxmox Mail Gateway Custom Check Interface for the Ikarus Server. <br> (license is required)
 
 ## Info
 
@@ -26,23 +24,20 @@ For use cases which are not handled by the Proxmox Mail Gateway Virus Detector a
 - ubuntu:2004 [Docker]
 - debain:stable [Docker]
 
-```
+```bash
 [18.08.2021 13:31:24] Remote-Manager[127.0.0.1]: ImportLicense 127.0.0.1: Unexpected initial response ''
 Error: Could not import license file
 ```
 
 ## access
 
-http://IP:80/virusscan
-
-- folder: /virusscan
-- default port: 80
+`http://IP:80/virusscan`
 
 ## test STDERR (E) / STDOUT (O)
 
 > annotate-output ./post.sh -n
 
-```
+```bash
 annotate-output ./run.sh -n
 16:12:48 I: Started ./post.sh -n
 16:12:53 E: curl: (28) Connection timed out after 5000 milliseconds
